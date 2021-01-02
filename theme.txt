@@ -1,0 +1,19 @@
+Theme: Roguelike and Doomlike
+GAME NAME: OOGA BOOGA
+
+Post-apocalyptic - Dystopian?
+
+Dungeons are ruined cities, which have not been raided by
+raiders.
+
+seed = image? 4x4 .png image
+
+4x4 = 16 pixels
+1 pixel = 1 RGB(R, G, B)
+r = 256 total
+b = 256 total
+g = 256 total
+
+256 = 2^8
+(2^8)^3 = 2^24
+2^4 * 2^ 24 = 2^28 total values

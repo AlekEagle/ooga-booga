@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Main.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/TextureRect.cs" type="Script" id=2]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.37842
+margin_bottom = -2.37842
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = -0.00146317
+anchor_top = 0.00471415
+anchor_right = -0.00146317
+anchor_bottom = 0.00471415
+margin_left = 512.809
+margin_top = 84.9087
+margin_right = 1412.81
+margin_bottom = 984.909
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand = true
+stretch_mode = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+margin_left = 80.1086
+margin_top = 485.622
+margin_right = 272.109
+margin_bottom = 505.622
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="."]
+margin_left = 80.1086
+margin_top = 471.405
+margin_right = 272.109
+margin_bottom = 487.405
+min_value = 1.0
+max_value = 12.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 1.18919
+margin_top = 490.378
+margin_right = 41.1892
+margin_bottom = 504.378
+text = "Color:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 1.18919
+margin_top = 473.135
+margin_right = 41.1892
+margin_bottom = 487.135
+text = "Brush Size:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 280.058
+margin_top = 472.54
+margin_right = 351.058
+margin_bottom = 486.54
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="HSlider" to="." method="ChangeLabel"]

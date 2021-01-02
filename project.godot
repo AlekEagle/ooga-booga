@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="ooga booga"
+run/main_scene="res://Scenes/Main.tscn"
+boot_splash/use_filter=false
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/vsync/use_vsync=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
+[physics]
+
+2d/thread_model=2
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+quality/2d/use_nvidia_rect_flicker_workaround=true
+quality/2d/use_pixel_snap=true
+quality/filters/anisotropic_filter_level=1
+quality/shadows/filter_mode=0
+quality/depth/hdr.mobile=true
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false
