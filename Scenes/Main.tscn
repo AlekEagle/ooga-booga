@@ -1,13 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/TextureRect.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/ExportFileDialog.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/ImportFileDialog.cs" type="Script" id=4]
+[ext_resource path="res://Fonts/PixelFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Themes/Pixel Font Theme.tres" type="Theme" id=6]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 5 )
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -4.75684
-margin_right = -4.75671
+margin_left = -2.237
+margin_top = 2.00903
+margin_right = -2.23694
+margin_bottom = 2.00903
+theme = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,9 +28,9 @@ anchor_left = -0.00146317
 anchor_top = 0.00471415
 anchor_right = -0.00146317
 anchor_bottom = 0.00471415
-margin_left = 510.289
+margin_left = 507.619
 margin_top = 77.8989
-margin_right = 1410.29
+margin_right = 1407.62
 margin_bottom = 977.899
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -32,19 +42,19 @@ __meta__ = {
 }
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="."]
-margin_left = 80.1086
-margin_top = 485.622
-margin_right = 272.109
-margin_bottom = 505.622
+margin_left = 125.458
+margin_top = 521.4
+margin_right = 317.459
+margin_bottom = 547.4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSlider" type="HSlider" parent="."]
-margin_left = 80.1086
-margin_top = 471.405
-margin_right = 272.109
-margin_bottom = 487.405
+margin_left = 124.773
+margin_top = 472.704
+margin_right = 316.773
+margin_bottom = 504.704
 min_value = 1.0
 max_value = 12.0
 value = 1.0
@@ -53,43 +63,92 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 1.18919
-margin_top = 490.378
-margin_right = 41.1892
-margin_bottom = 504.378
+margin_left = 6.74508
+margin_top = 522.92
+margin_right = 46.7451
+margin_bottom = 536.92
 text = "Color:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 1.18919
-margin_top = 473.135
-margin_right = 41.1892
-margin_bottom = 487.135
+margin_left = 6.84447
+margin_top = 475.958
+margin_right = 176.844
+margin_bottom = 508.958
 text = "Brush Size:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="."]
-margin_left = 280.058
-margin_top = 472.54
-margin_right = 351.058
-margin_bottom = 486.54
+margin_left = 330.531
+margin_top = 476.797
+margin_right = 401.531
+margin_bottom = 509.797
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Export" type="Button" parent="."]
-margin_left = 11.8584
-margin_top = 548.494
-margin_right = 64.8584
-margin_bottom = 568.494
+margin_left = 96.5065
+margin_top = 564.426
+margin_right = 176.507
+margin_bottom = 590.426
 text = "Export"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Import" type="Button" parent="."]
+margin_left = 10.1765
+margin_top = 564.408
+margin_right = 86.1765
+margin_bottom = 590.408
+text = "Import"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImportFileDialog" type="FileDialog" parent="."]
+margin_left = 607.0
+margin_top = 262.0
+margin_right = 1578.0
+margin_bottom = 734.0
+theme = ExtResource( 6 )
+resizable = true
+mode_overrides_title = false
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png" )
+show_hidden_files = true
+current_dir = "/"
+current_path = "/"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportFileDialog" type="FileDialog" parent="."]
+margin_left = 607.0
+margin_top = 262.0
+margin_right = 1578.0
+margin_bottom = 734.0
+resizable = true
+mode_overrides_title = false
+access = 2
+filters = PoolStringArray( "*.png" )
+show_hidden_files = true
+current_dir = "/"
+current_path = "/"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="value_changed" from="HSlider" to="." method="ChangeLabel"]
-[connection signal="pressed" from="Export" to="." method="OnExportButtonPressed"]
+[connection signal="pressed" from="Export" to="ExportFileDialog" method="_ShowDialog"]
+[connection signal="pressed" from="Import" to="ImportFileDialog" method="_ShowDialog"]
+[connection signal="file_selected" from="ImportFileDialog" to="." method="_ImportSeed"]
+[connection signal="file_selected" from="ExportFileDialog" to="." method="_ExportSeed"]

@@ -29,7 +29,9 @@ public class TextureRect : OogaBooga.SeedCanvas
       {
         for (int y = 0; y < slider.Value; y++)
         {
-          thing.SetPixelv(loc + new Vector2(x, y), GetParent<Control>().GetNode<ColorPickerButton>("ColorPickerButton").Color);
+          Vector2 newLoc = loc + new Vector2(x, y);
+          if (newLoc.x >= 128 || newLoc.y >= 128) return;
+          thing.SetPixelv(newLoc, GetParent<Control>().GetNode<ColorPickerButton>("ColorPickerButton").Color);
         }
       }
       ImageTexture a = new ImageTexture();
