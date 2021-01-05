@@ -6,8 +6,8 @@
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -2.37842
-margin_bottom = -2.37842
+margin_left = -4.75684
+margin_right = -4.75671
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,10 +18,10 @@ anchor_left = -0.00146317
 anchor_top = 0.00471415
 anchor_right = -0.00146317
 anchor_bottom = 0.00471415
-margin_left = 512.809
-margin_top = 84.9087
-margin_right = 1412.81
-margin_bottom = 984.909
+margin_left = 510.289
+margin_top = 77.8989
+margin_right = 1410.29
+margin_bottom = 977.899
 size_flags_horizontal = 0
 size_flags_vertical = 0
 expand = true
@@ -81,4 +81,15 @@ text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Export" type="Button" parent="."]
+margin_left = 11.8584
+margin_top = 548.494
+margin_right = 64.8584
+margin_bottom = 568.494
+text = "Export"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="value_changed" from="HSlider" to="." method="ChangeLabel"]
+[connection signal="pressed" from="Export" to="." method="OnExportButtonPressed"]
