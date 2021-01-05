@@ -3,12 +3,6 @@ using System;
 
 public class ExportFileDialog : FileDialog
 {
-
-  public override void _Ready()
-  {
-
-  }
-
   private void _ShowDialog()
   {
     CurrentDir = OS.GetSystemDir(OS.SystemDir.Documents);
