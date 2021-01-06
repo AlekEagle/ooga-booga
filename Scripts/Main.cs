@@ -11,7 +11,7 @@ public class Main : Control
 
   public override void _Ready()
   {
-	image = seedGen.CreateRandomImageSeed();
+	image = seedGen.GetImageFromSeed(0);
 
 	textRect = GetNode<TextureRect>("TextureRect");
 
@@ -19,9 +19,7 @@ public class Main : Control
 	imgText.CreateFromImage(image);
 
 	textRect.Texture = imgText;
-	imgText.Flags = 0;
-
-	GD.Print(seedGen.GetSeedFromImage(image));
+	imgText.Flags = 0;  
   }
 
   private void ChangeLabel(float a)

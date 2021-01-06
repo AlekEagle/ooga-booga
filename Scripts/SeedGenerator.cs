@@ -5,7 +5,7 @@ public class SeedGenerator
 {
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
-    public Image CreateRandomImageSeed()
+    public Image GetRandomImageSeed()
     {
         Image img = new Image();
         img.Create(128, 128, false, Image.Format.Rgb8);
@@ -23,18 +23,23 @@ public class SeedGenerator
         return img;
     }
 
-    public Image CreateImageFromSeed(uint seed)
+    public Image GetImageFromSeed(uint seed)
     {
         Image img = new Image();
         img.Create(128, 128, false, Image.Format.Rgb8);
         img.Lock();
-        for(int x = 0; x < 128; x++)
-        {
-            for(int y = 0; y < 128; y++)
-            {
 
-            }
+        byte[] imgData = new byte[128 * 128];
+        /*
+        Array.Reverse(imgData);
+
+        for(int i = 0; i < imgData.Length; i++)
+        {
+            imgData[i] = BitConverter.GetBytes(seed)[i];
         }
+        */
+        img.CreateFromData(128, 128, false, Image.Format.Rgb8, imgData);
+
         return img;
     }
 
@@ -45,12 +50,9 @@ public class SeedGenerator
 
         byte[] imgData = img.GetData();
 
-        for(int x = 0; x < 128; x++)
+        for(int i = 0; i < imgData.Length; i++)
         {
-            for(int y = 0; y < 128; y++)
-            {
-                seed += (uint)imgData[0 + (y * x)] + (uint)imgData[1 + (y * x)] + (uint)imgData[2 + (y * x)];
-            }
+            seed += (uint)imgData[i];
         }
 
         return seed;
