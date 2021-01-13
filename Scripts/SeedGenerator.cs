@@ -1,60 +1,50 @@
 using Godot;
 using System;
 
-public class SeedGenerator
+public class SeedGenerator : Control
 {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
+  public TextureRect textRect;
+  public RandomNumberGenerator rng = new RandomNumberGenerator();
+  public Seed seedGen = new Seed();
+  Image image = new Image();
+  public uint seed = 0;
 
-    public Image GetRandomImageSeed()
-    {
-        Image img = new Image();
-        img.Create(128, 128, false, Image.Format.Rgb8);
-        img.Lock();
+  public override void _Ready()
+  {
+    image = seedGen.GetRandomImageSeed();
 
-        for (int x = 0; x < 128; x++)
-        {
-            for (int y = 0; y < 128; y++)
-            {
-                rng.Randomize();
-                float r = rng.Randf(), g = rng.Randf(), b = rng.Randf();
-                img.SetPixel(x, y, new Color(r, g, b));
-            }
-        }
-        return img;
-    }
+    textRect = GetNode<TextureRect>("TextureRect");
 
-    public Image GetImageFromSeed(uint seed)
-    {
-        Image img = new Image();
-        img.Create(128, 128, false, Image.Format.Rgb8);
-        img.Lock();
+    ImageTexture imgText = new ImageTexture();
+    imgText.CreateFromImage(image);
 
-        byte[] imgData = new byte[128 * 128];
-        /*
-        Array.Reverse(imgData);
+    textRect.Texture = imgText;
+    imgText.Flags = 0;
+  }
 
-        for(int i = 0; i < imgData.Length; i++)
-        {
-            imgData[i] = BitConverter.GetBytes(seed)[i];
-        }
-        */
-        img.CreateFromData(128, 128, false, Image.Format.Rgb8, imgData);
+  private void ChangeLabel(float a)
+  {
+    GetNode<Label>("Label3").Text = a.ToString();
+  }
 
-        return img;
-    }
+  private void _ImportSeed(String seedPath)
+  {
+    ImageTexture imageTexture = new ImageTexture();
+    Image img = new Image();
+    img.Load(seedPath);
+    imageTexture.CreateFromImage(img);
+    textRect.Texture = imageTexture;
+    imageTexture.Flags = 0;
 
-    public uint GetSeedFromImage(Image img)
-    {
-        img.Lock();
-        uint seed = 0;
+    GD.Print(seedGen.GetSeedFromImage(img));
+  }
 
-        byte[] imgData = img.GetData();
+  private void _ExportSeed(String seedPath)
+  {
+    image = new Image();
+    image.CreateFromData(128, 128, false, Image.Format.Rgb8, textRect.Texture.GetData().GetData());
+    image.SavePng(seedPath);
 
-        for(int i = 0; i < imgData.Length; i++)
-        {
-            seed += (uint)imgData[i];
-        }
-
-        return seed;
-    }
+    GD.Print(seedGen.GetSeedFromImage(image));
+  }
 }

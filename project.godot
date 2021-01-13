@@ -8,15 +8,10 @@
 
 config_version=4
 
-_global_script_classes=[  ]
-_global_script_class_icons={
-
-}
-
 [application]
 
 config/name="ooga booga"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://Scenes/SeedGenerator.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
